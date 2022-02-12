@@ -8,7 +8,6 @@ CORPUS_PARENT = dirname(normpath(CORPUS_PATH))
 
 
 # ====================
-
 class Folder:
 
     # ====================
