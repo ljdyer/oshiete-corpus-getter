@@ -43,7 +43,7 @@ After a hard day's scraping, I want to know how much closer to my goal number of
 
 Sample of output:
 
-<img src="readme-img/corpus_stats.png"></img>
+<img src="readme-img/corpus-stats.png"></img>
 
 ### Compiling the corpus
 
