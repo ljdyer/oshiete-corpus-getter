@@ -1,2 +1,4 @@
 BeautifulSoup4
 fugashi[unidic-lite]
+pandas
+openpyxl

@@ -11,3 +11,25 @@ def jp_word_count(file_path: str) -> tuple:
         word_count = len(tagger(text))
 
     return word_count
+
+
+# ====================
+def sum_of_jp_word_counts(files: str):
+
+    word_counts = [jp_word_count(fn) for fn in files]
+    return(sum(word_counts))
+
+
+# ====================
+def word_tokenize_line(jp_text: str):
+
+    tokenized = ' '.join([word.surface for word in tagger(jp_text)])
+    return tokenized
+
+# ====================
+def word_tokenize_file(input_path: str, output_path: str):
+
+    with open(input_path, encoding='utf-8') as in_file, \
+         open(output_path, "a", encoding='utf-8') as out_file:
+        for line in in_file:
+            out_file.write("\n" + word_tokenize_line(line))

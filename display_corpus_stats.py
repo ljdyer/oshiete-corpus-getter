@@ -1,10 +1,28 @@
-from os import listdir
-from os.path import dirname, isdir, isfile, join, normpath, relpath
+"""
+display_corpus_stats.py
 
-from helper.text_helper import jp_word_count
+Prints a representation of the internal folder structure with fil and words
+counts for each folder. Word counts for folders with files are the sum
+of the words in the files in the folder. Word/file counts for folders with
+subfolders are the sum of the word/file counts of their subfolders.
+
+Works using recursion in the get_num_files and get_total_word_count methods
+of the Folder class.
+
+Should work for any folder structure, but it is assumed that files are only in
+the base level, so any files in folders with subfolders are ignored.
+
+Assumes that the only .txt files are in the folder, so behaviour may be
+unpredictable if other types of files are included.
+"""
+
+import os
+from os.path import basename, normpath, relpath
+
+from helper.file_helper import get_files_and_folders
+from helper.text_helper import sum_of_jp_word_counts
 
 CORPUS_PATH = "E:/oshiete_corpus/"
-CORPUS_PARENT = dirname(normpath(CORPUS_PATH))
 
 
 # ====================
@@ -15,14 +33,15 @@ class Folder:
 
         path = normpath(path)
         self.abs_path = path
-        rel_path = (relpath(path, CORPUS_PARENT))
-        path_split = rel_path.split('\\')
-        self.level = len(path_split) - 1
-        self.base_name = path_split[-1]
+        self.base_name = basename(path)
+        if path == normpath(CORPUS_PATH):
+            self.depth = 0
+        else:
+            self.depth = len(relpath(path, CORPUS_PATH).split('\\'))
         files, subfolders = get_files_and_folders(path)
         if not subfolders:
             self.num_files = len(files)
-            self.total_word_count = sum_of_word_counts(files)
+            self.total_word_count = sum_of_jp_word_counts(files)
         self.subfolders = [Folder(sf) for sf in subfolders]
 
     # ====================
@@ -31,7 +50,7 @@ class Folder:
         num_files = self.get_num_files()
         total_word_count = self.get_total_word_count()
         print(
-            f"{chr(9) * self.level}{self.base_name}:",
+            f"{chr(9) * self.depth}{self.base_name}:",
             f"{num_files} files, {total_word_count} words"
         )
         for sf in self.subfolders:
@@ -55,20 +74,17 @@ class Folder:
 
 
 # ====================
-def sum_of_word_counts(files: str):
+def main():
 
-    word_counts = [jp_word_count(fn) for fn in files]
-    return(sum(word_counts))
+    print('Getting file and word counts...')
+    corpus_folder = Folder(CORPUS_PATH)
+    os.system('cls')
+    print()
+    corpus_folder.display()
+    print()
 
 
 # ====================
-def get_files_and_folders(path: str) -> tuple:
+if __name__ == "__main__":
 
-    files_and_folders = [join(path, e) for e in listdir(path)]
-    files = [e for e in files_and_folders if isfile(e)]
-    folders = [e for e in files_and_folders if isdir(e)]
-    return (files, folders)
-
-
-corpus_folder = Folder(CORPUS_PATH)
-corpus_folder.display()
+    main()

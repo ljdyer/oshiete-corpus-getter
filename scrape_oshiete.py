@@ -1,3 +1,25 @@
+"""
+scrape_oshiete.py
+
+Scrapes pages from the website oshiete.goo.ne.jp
+
+Settings should be stored in JSON format in the location specified by
+PROGRESS_JSON_PATH, with a key for each year (e.g. '2001') each containing
+another object with keys 'continue_from' and 'end' specifying the page IDs
+to continue from and end on.
+
+Run the program by calling it from the terminal with the year specified as
+an argument.
+
+E.g.
+> python scrape.oshiete.py 2001
+
+The program can be terminated at any time by pressing Ctrl+C and will
+save its progress by updating the value of 'continue_from' for the year
+it was scraping for in the progress JSON.
+"""
+
+import argparse
 import csv
 import json
 import os
@@ -9,6 +31,19 @@ from get_oshiete_article import PageResult
 CORPUS_PATH = "E:/oshiete_corpus/"
 LOG_FILE_PATH = os.path.join(CORPUS_PATH, "log.csv")
 PROGRESS_JSON_PATH = 'progress.json'
+
+
+# ====================
+def get_args():
+    """Get command-line arguments"""
+
+    parser = argparse.ArgumentParser(
+        description='Scrape oshiete.goo.ne.jp',
+        formatter_class=argparse.ArgumentDefaultsHelpFormatter)
+    parser.add_argument('year',
+                        metavar='year',
+                        help='The year to scrape content from')
+    return parser.parse_args()
 
 
 # ====================
@@ -108,6 +143,20 @@ def get_articles(year: int):
 
 
 # ====================
+def main():
+
+    args = get_args()
+    year = str(args.year)
+    progress = load_progress()
+    if year in progress:
+        get_articles(year)
+    else:
+        print("No settings information available for that year.",
+              "Please add settings information or choose from one of the",
+              f"following years: {progress.keys()}")
+
+
+# ====================
 if __name__ == "__main__":
 
-    get_articles(2021)
+    main()
