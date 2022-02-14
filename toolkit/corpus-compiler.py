@@ -30,6 +30,7 @@ CATEGORY_NAME_TRANSLATIONS = {
     "コンピューター・テクノロジー": 'computing-technology'
 }
 
+
 # ====================
 def get_common_categories(exclude=[]):
     """Get the list of categories that are present for both years and are not

@@ -13,7 +13,7 @@ I am aiming for 10 million words from each year. Here is my progress as of 14th 
 
 ## How to use
 
-The toolkit is not really designed for public use, but anyone interested in seeing it in action can clone the repo and run the individual Python programs from the terminal after installing the dependencies in [requirements.txt](requirements.txt).
+The toolkit is not really designed for general use, but anyone interested in seeing it in action can clone the repo and run the individual Python programs from the terminal after installing the dependencies in [requirements.txt](requirements.txt).
 
 Details of usage for each module are included in the module docstrings.
 
@@ -43,16 +43,8 @@ After a hard day's scraping, I want to know how much closer to my goal number of
 
 Sample of output:
 
-<img src="readme-img/.png">corpus-stats.png</img>
+<img src="readme-img/.png">corpus_stats.png</img>
 
 ### Compiling the corpus
 
 (Details coming soon)
-
-
-
-
-
-
-
-
