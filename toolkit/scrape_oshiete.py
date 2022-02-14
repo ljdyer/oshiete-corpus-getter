@@ -26,7 +26,7 @@ import os
 from helper.file_helper import (
     create_blank_if_not_exist, save_text_to_file, write_line_to_file
 )
-from get_oshiete_article import PageResult
+from toolkit.get_oshiete_article import PageResult
 
 CORPUS_PATH = "E:/oshiete_corpus/"
 LOG_FILE_PATH = os.path.join(CORPUS_PATH, "log.csv")
