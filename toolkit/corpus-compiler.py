@@ -13,7 +13,7 @@ from helper.text_helper import jp_word_count, sum_of_jp_word_counts, word_tokeni
 
 CORPUS_PATH = "E:/oshiete_corpus/"
 YEARS = ['2001', '2021']
-EXCLUDE_CATEGORIES = ['gooサービス']
+EXCLUDE_CATEGORIES = ['gooサービス', '公式アカウントからの質問']
 CATEGORY_NAME_TRANSLATIONS = {
     "ビジネス・キャリア": 'business-career',
     "悩み相談・人生相談": 'life-advice',

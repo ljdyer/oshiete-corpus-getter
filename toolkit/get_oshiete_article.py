@@ -10,8 +10,8 @@ import bs4
 from helper.file_helper import save_text_to_file
 from helper.html_helper import get_all_text, get_bs
 
-TEST_PAGE_URL = "https://oshiete.goo.ne.jp/qa/193972.html"
-TEST_PAGE_YEAR = 2002
+TEST_PAGE_URL = "https://oshiete.goo.ne.jp/qa/49186.html"
+TEST_PAGE_YEAR = 2001
 
 
 class PageResult:
@@ -25,7 +25,7 @@ class PageResult:
     success: bool
         whether the page was successfully scraped
     err_msg: str
-        the error message is the case the page could not be scraped
+        an error message in the case the page could not be scraped
     category: str
         the category of the article. This is the top-level category
         displayed immediately to the right of "教えて!goo" in the
@@ -79,7 +79,7 @@ class PageResult:
             return
 
         # Make sure there is some content to return
-        if self.text.isspace():
+        if len(self.text) == 0 or self.text.isspace():
             self.success = False
             self.err_msg = f"Did not find any content written in {year}."
             return
@@ -140,6 +140,7 @@ def print_test_page(url: str, year: int):
 
     page_result = PageResult(url, year)
     if page_result.success:
+        print(page_result.success)
         print(page_result.category)
         save_text_to_file(page_result.text, './test.txt')
     else:

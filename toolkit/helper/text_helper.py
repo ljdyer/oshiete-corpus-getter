@@ -1,4 +1,5 @@
 import fugashi
+from os import remove
 
 tagger = fugashi.Tagger()
 
@@ -9,8 +10,11 @@ def jp_word_count(file_path: str) -> tuple:
     with open(file_path, encoding='utf-8') as f:
         text = f.read()
         word_count = len(tagger(text))
-
+    if len(text) == 0:
+        raise RuntimeError(f'Empty file encountered: {file_path}\n'
+                           "Terminating program.")
     return word_count
+
 
 
 # ====================

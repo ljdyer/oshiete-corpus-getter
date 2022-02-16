@@ -23,10 +23,10 @@ import argparse
 import csv
 import json
 import os
-from helper.file_helper import (
-    create_blank_if_not_exist, save_text_to_file, write_line_to_file
-)
-from toolkit.get_oshiete_article import PageResult
+
+from get_oshiete_article import PageResult
+from helper.file_helper import (create_blank_if_not_exist, save_text_to_file,
+                                write_line_to_file)
 
 CORPUS_PATH = "E:/oshiete_corpus/"
 LOG_FILE_PATH = os.path.join(CORPUS_PATH, "log.csv")
@@ -146,9 +146,9 @@ def get_articles(year: int):
 def main():
 
     args = get_args()
-    year = str(args.year)
+    year = int(args.year)
     progress = load_progress()
-    if year in progress:
+    if str(year) in progress:
         get_articles(year)
     else:
         print("No settings information available for that year.",

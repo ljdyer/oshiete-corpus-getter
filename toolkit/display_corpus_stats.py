@@ -38,11 +38,30 @@ class Folder:
             self.depth = 0
         else:
             self.depth = len(relpath(path, CORPUS_PATH).split('\\'))
+
         files, subfolders = get_files_and_folders(path)
-        if not subfolders:
-            self.num_files = len(files)
-            self.total_word_count = sum_of_jp_word_counts(files)
+        if subfolders:
+            self.files = []
+        else:
+            self.files = files
         self.subfolders = [Folder(sf) for sf in subfolders]
+
+    # ====================
+    def get_file_word_counts(self):
+
+        if self.files:
+            num_files = self.get_num_files()
+            total_word_count = self.get_total_word_count()
+            print(
+                f"{chr(9) * self.depth}{self.base_name}:",
+                f"{num_files} files, {total_word_count} words"
+            )
+        else:
+            print(
+                f"{chr(9) * self.depth}{self.base_name}"
+            )
+        for sf in self.subfolders:
+            sf.get_file_word_counts()
 
     # ====================
     def display(self):
@@ -61,6 +80,9 @@ class Folder:
 
         if hasattr(self, 'num_files'):
             return self.num_files
+        elif self.files:
+            self.num_files = len(self.files)
+            return self.num_files
         else:
             return sum([sf.get_num_files() for sf in self.subfolders])
 
@@ -69,6 +91,9 @@ class Folder:
 
         if hasattr(self, 'total_word_count'):
             return self.total_word_count
+        elif self.files:
+            self.total_word_count = sum_of_jp_word_counts(self.files)
+            return self.total_word_count
         else:
             return sum([sf.get_total_word_count() for sf in self.subfolders])
 
@@ -76,9 +101,17 @@ class Folder:
 # ====================
 def main():
 
-    print('Getting file and word counts...')
+    os.system('cls')
+    print('Determining folder structure...')
     corpus_folder = Folder(CORPUS_PATH)
     os.system('cls')
+    print('Determined folder structure.',
+          'Getting file and word counts for base level folders...')
+    print()
+    corpus_folder.get_file_word_counts()
+    os.system('cls')
+    print('Got file and word counts for base level folders.',
+          'Calculating folder totals...')
     print()
     corpus_folder.display()
     print()
