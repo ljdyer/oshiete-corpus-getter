@@ -8,8 +8,8 @@ I am aiming for 10 million words from each year. Here is my progress as of 14th 
 
 | Year | Target | So far |
 | --- | --- | --- |
-| 2001 | 10,000,000 | 3,700,821 |
-| 2021 | 10,000,000 | 4,131,061 |
+| 2001 | 10,000,000 | 10,471,368 |
+| 2021 | 10,000,000 | 8,689,618 |
 
 ## How to use
 

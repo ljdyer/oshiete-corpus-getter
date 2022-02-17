@@ -12,7 +12,7 @@ of the Folder class.
 Should work for any folder structure, but it is assumed that files are only in
 the base level, so any files in folders with subfolders are ignored.
 
-Assumes that the only .txt files are in the folder, so behaviour may be
+Assumes that only .txt files are in the folders, so behaviour may be
 unpredictable if other types of files are included.
 """
 
