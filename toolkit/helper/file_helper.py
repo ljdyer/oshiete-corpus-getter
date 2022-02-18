@@ -54,12 +54,3 @@ def get_files_and_folders(path: str, full_path: bool = True) -> tuple:
         folders = [e for e in files_and_folders if isdir(join(path, e))]
     return (files, folders)
 
-
-# ====================
-def concatenate_text_files(source_files: list, target_path: str):
-
-    with open(target_path, 'wb') as target_file:
-        for f in source_files:
-            with open(f, 'rb') as source_file:
-                shutil.copyfileobj(source_file, target_file)
-                target_file.write(b'\n\n')
