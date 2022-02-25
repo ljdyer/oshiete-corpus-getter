@@ -19,7 +19,7 @@ CORPUS_PATH
 │     ├── etc.
 └── etc.
 
-Where the category folders contain .txt files containing Japanese text.
+Where the category folders contain .txt files with Japanese text.
 
 Only categories present in both years will be included in the corpus.
 Documents will be chosen such that the number of words in each year is
